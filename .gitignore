@@ -1,0 +1,8 @@
+# Class files
+Game.class
+GameState.class
+Main.class
+SaveManager.class
+
+# Ignore IDE files
+.idea/

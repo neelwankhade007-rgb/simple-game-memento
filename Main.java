@@ -8,7 +8,7 @@ public class Main {
         SaveManager manager = new SaveManager();
 
         while (true) {
-            System.out.println("\n1.Play  2.Load  3.Exit");
+            System.out.println("\n1. Play   2. Load   3. Exit");
             System.out.print("Choose: ");
             int choice = sc.nextInt();
             int flag = 0;
@@ -16,24 +16,30 @@ public class Main {
             switch (choice) {
                 case 1:
                     game.play();
-                    while(true) {
-                        System.out.println("\n1.Damage  2.Save  3.Status  4.Exit");
+                    while (true) {
+                        System.out.println("\n1. Damage   2. Save   3. Status   4. Exit");
                         System.out.print("Choose: ");
                         int subchoice = sc.nextInt();
-                        switch(subchoice) {
+                        switch (subchoice) {
                             case 1:
-                                game.playTurn();
+                                boolean alive = game.playTurn();
+                                if (!alive) {
+                                    System.out.println("\n--- GAME OVER ---");
+                                    System.out.println("Exiting Game...");
+                                    sc.close();
+                                    return; // THIS exits entire program
+                                }
                                 break;
 
                             case 2:
                                 manager.addSave(game.save());
                                 break;
-                                     
+
                             case 3:
                                 game.showStatus();
                                 break;
 
-                            case 4 :
+                            case 4:
                                 flag = 1;
                                 break;
 
@@ -55,8 +61,8 @@ public class Main {
                         if (state != null) {
                             game.restore(state);
                         }
-                    }
-                    else System.out.println("\n--- NO SAVED GAMES FOUND ---");
+                    } else
+                        System.out.println("\n--- NO SAVED GAMES FOUND ---");
                     break;
 
                 case 3:

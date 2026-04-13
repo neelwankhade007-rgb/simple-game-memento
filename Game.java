@@ -10,12 +10,14 @@ public class Game {
     private List<Opponent> opponents;
     private Random random = new Random();
 
-    private static final String[] TYPES = {"A", "B", "C", "D", "E"};
+    private static final String[] TYPES = { "A", "B", "C", "D", "E" };
 
-    public Game() {}
+    public Game() {
+    }
 
     public void play() {
-        generateOpponents();;
+        generateOpponents();
+        ;
     }
 
     // Generate 5 random opponents (can repeat)
@@ -34,7 +36,7 @@ public class Game {
     }
 
     // TURN SYSTEM
-    public void playTurn() {
+    public boolean playTurn() {
         System.out.println("\n--- PLAYER TURN ---");
         playerAttack();
 
@@ -43,7 +45,7 @@ public class Game {
         if (opponents.isEmpty()) {
             levelUp();
             System.out.println("\n--- YOU LEVELED UP! ---");
-            return;
+            return true; // game continues
         }
 
         System.out.println("\n--- OPPONENT TURN ---");
@@ -51,13 +53,17 @@ public class Game {
 
         if (health <= 0) {
             health = 0;
-            System.out.println("\n--- YOU LOSE ---");
+            System.out.println("\n--- GAME OVER ---");
+            return false; // game ends
         }
+
+        return true; // still alive → continue
     }
 
     // Player attacks first opponent
     private void playerAttack() {
-        if (opponents.isEmpty()) return;
+        if (opponents.isEmpty())
+            return;
 
         Opponent target = opponents.get(0);
         int damage = 20;
@@ -109,6 +115,8 @@ public class Game {
 
     // SAVE STATE
     public GameState save() {
+        System.out.println("Saving Game...");
+        System.out.println("Level: " + level + " | HP: " + health + " | Score: " + score);
         return new GameState(level, position, health, score, opponents);
     }
 
@@ -125,6 +133,7 @@ public class Game {
         }
 
         System.out.println("Game Restored!");
+        System.out.println("Level: " + level + " | HP: " + health + " | Score: " + score);
     }
 
     public void showStatus() {

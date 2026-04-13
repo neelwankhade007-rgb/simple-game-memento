@@ -20,7 +20,7 @@ public class SaveManager {
         System.out.println("\nSaved Games:");
         for (int i = 0; i < saves.size(); i++) {
             GameState s = saves.get(i);
-            System.out.println(i + " → Level " + s.getLevel()
+System.out.println(i + " - Level " + s.getLevel()
                     + ", Pos " + s.getPosition()
                     + ", Health " + s.getHealth()
                     + ", Score " + s.getScore());

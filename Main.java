@@ -26,8 +26,7 @@ public class Main {
                                 if (!alive) {
                                     System.out.println("\n--- GAME OVER ---");
                                     System.out.println("Exiting Game...");
-                                    sc.close();
-                                    return; // THIS exits entire program
+                                    flag = 1;
                                 }
                                 break;
 

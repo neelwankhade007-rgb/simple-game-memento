@@ -16,7 +16,7 @@ public class SaveManager {
         return null;
     }
 
-    public void listSaves() {
+    public boolean listSaves() {
         System.out.println("\nSaved Games:");
         for (int i = 0; i < saves.size(); i++) {
             GameState s = saves.get(i);
@@ -25,5 +25,6 @@ public class SaveManager {
                     + ", Health " + s.getHealth()
                     + ", Score " + s.getScore());
         }
+        return !(saves.isEmpty());
     }
 }

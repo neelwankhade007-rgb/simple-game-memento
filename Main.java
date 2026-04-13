@@ -8,38 +8,58 @@ public class Main {
         SaveManager manager = new SaveManager();
 
         while (true) {
-            System.out.println("\n1.Play  2.Damage  3.Save  4.Load  5.Status  6.Exit");
+            System.out.println("\n1.Play  2.Load  3.Exit");
             System.out.print("Choose: ");
             int choice = sc.nextInt();
+            int flag = 0;
 
             switch (choice) {
                 case 1:
                     game.play();
-                    break;
+                    while(true) {
+                        System.out.println("\n1.Damage  2.Save  3.Status  4.Exit");
+                        System.out.print("Choose: ");
+                        int subchoice = sc.nextInt();
+                        switch(subchoice) {
+                            case 1:
+                                game.playTurn();
+                                break;
 
-                case 2:
-                    game.takeDamage();
-                    break;
+                            case 2:
+                                manager.addSave(game.save());
+                                break;
+                                     
+                            case 3:
+                                game.showStatus();
+                                break;
 
-                case 3:
-                    manager.addSave(game.save());
-                    break;
+                            case 4 :
+                                flag = 1;
+                                break;
 
-                case 4:
-                    manager.listSaves();
-                    System.out.print("Enter save index: ");
-                    int idx = sc.nextInt();
-                    GameState state = manager.getSave(idx);
-                    if (state != null) {
-                        game.restore(state);
+                            default:
+                                System.out.println("Invalid choice");
+                        }
+                        if (flag == 1) {
+                            flag = 0;
+                            break;
+                        }
                     }
                     break;
 
-                case 5:
-                    game.showStatus();
+                case 2:
+                    if (manager.listSaves()) {
+                        System.out.print("Enter save index: ");
+                        int idx = sc.nextInt();
+                        GameState state = manager.getSave(idx);
+                        if (state != null) {
+                            game.restore(state);
+                        }
+                    }
+                    else System.out.println("\n--- NO SAVED GAMES FOUND ---");
                     break;
 
-                case 6:
+                case 3:
                     System.out.println("Exiting Game");
                     sc.close();
                     return;

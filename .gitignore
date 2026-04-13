@@ -3,6 +3,7 @@ Game.class
 GameState.class
 Main.class
 SaveManager.class
+Opponent.class
 
 # Ignore IDE files
 .idea/

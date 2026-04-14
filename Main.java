@@ -58,50 +58,55 @@ public class Main {
                         System.out.print("Enter save index: ");
                         int idx = sc.nextInt();
 
-                        GameState state = manager.getSave(idx);
+                        try {
+                            GameState state = manager.getSave(idx);
 
-                        if (state == null) {
-                            System.out.println("\n--- INVALID SAVE INDEX ---");
-                            break;
-                        }
-
-                        game.restore(state);
-
-                        while (true) {
-                            System.out.println("\n1. Damage   2. Save   3. Status   4. Exit");
-                            System.out.print("Choose: ");
-                            int subchoice = sc.nextInt();
-
-                            switch (subchoice) {
-                                case 1:
-                                    boolean alive = game.playTurn();
-                                    if (!alive) {
-                                        System.out.println("\n--- GAME OVER ---");
-                                        System.out.println("Exiting Game...");
-                                        flag = 1;
-                                    }
-                                    break;
-
-                                case 2:
-                                    manager.addSave(game.save());
-                                    break;
-
-                                case 3:
-                                    game.showStatus();
-                                    break;
-
-                                case 4:
-                                    flag = 1;
-                                    break;
-
-                                default:
-                                    System.out.println("Invalid choice");
-                            }
-
-                            if (flag == 1) {
-                                flag = 0;
+                            if (state == null) {
+                                System.out.println("\n--- INVALID SAVE INDEX ---");
                                 break;
                             }
+
+                            game.restore(state);
+
+                            while (true) {
+                                System.out.println("\n1. Damage   2. Save   3. Status   4. Exit");
+                                System.out.print("Choose: ");
+                                int subchoice = sc.nextInt();
+
+                                switch (subchoice) {
+                                    case 1:
+                                        boolean alive = game.playTurn();
+                                        if (!alive) {
+                                            System.out.println("\n--- GAME OVER ---");
+                                            System.out.println("Exiting Game...");
+                                            flag = 1;
+                                        }
+                                        break;
+
+                                    case 2:
+                                        manager.addSave(game.save());
+                                        break;
+
+                                    case 3:
+                                        game.showStatus();
+                                        break;
+
+                                    case 4:
+                                        flag = 1;
+                                        break;
+
+                                    default:
+                                        System.out.println("Invalid choice");
+                                }
+
+                                if (flag == 1) {
+                                    flag = 0;
+                                    break;
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("\n--- NO SAVED GAMES FOUND ---");
                         }
 
                     } else {

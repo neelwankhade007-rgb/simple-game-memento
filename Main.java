@@ -57,6 +57,7 @@ public class Main {
                     if (manager.listSaves()) {
                         System.out.print("Enter save index: ");
                         int idx = sc.nextInt();
+
                         try {
                             GameState state = manager.getSave(idx);
 

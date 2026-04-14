@@ -7,3 +7,7 @@ Opponent.class
 
 # Ignore IDE files
 .idea/
+
+# Misc
+*.log
+*.tmp

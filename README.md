@@ -48,10 +48,7 @@ The Memento pattern is used to implement the **save/load functionality** without
 
 ## 🛠️ How to Run
 
-### Compile
+### Compile & Run
 ```bash
 javac *.java
-
-### Run
-```bash
 java Main
